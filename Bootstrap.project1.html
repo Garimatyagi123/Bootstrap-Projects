@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PulseBoard Dashboard</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+body{
+background:#f5f7fb;
+font-family:Arial,Helvetica,sans-serif;
+overflow-x:hidden;
+}
+.sidebar{
+background:#1e293b;
+min-height:100vh;
+}
+.logo h2{
+color:white;
+font-weight:bold;
+}
+.logo p{
+color:#cbd5e1;
+font-size:14px;
+}
+.list-group-item{
+background:#1e293b;
+color:white;
+border:none;
+padding:15px 20px;
+}
+.list-group-item:hover{
+background:#334155;
+color:white;
+}
+.list-group-item.active{
+background:#2563eb;
+border:none;
+}
+.dashboard{
+background:#f8fafc;
+min-height:100vh;
+}
+.metric-card{
+border:none;
+border-radius:15px;
+transition:.3s;
+}
+.metric-card:hover{
+transform:translateY(-5px);
+}
+.metric-card .icon{
+font-size:40px;
+color:#2563eb;
+}
+.progress{
+height:10px;
+border-radius:30px;
+}
+.card{
+border-radius:15px;
+}
+.card-header{
+border-bottom:none;
+}
+.alert{
+border-radius:10px;
+}
+.modal-content{
+border-radius:15px;
+}
+@media(max-width:768px){
+.sidebar{
+min-height:auto;
+}
+.logo{
+padding:20px 0;
+}
+.dashboard{
+padding:20px;
+}
+}
+</style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-lg-2 col-md-3 sidebar p-0">
+<div class="logo text-center py-4">
+<h2>PulseBoard</h2>
+<p>Cloud Monitor</p>
+</div>
+<div class="list-group rounded-0">
+<a href="#" class="list-group-item list-group-item-action active">
+<i class="bi bi-speedometer2 me-2"></i>
+Overview
+</a>
+<a href="#" class="list-group-item list-group-item-action">
+<i class="bi bi-hdd-network me-2"></i>
+Services
+</a>
+<a href="#" class="list-group-item list-group-item-action">
+<i class="bi bi-bell-fill me-2"></i>
+Alerts
+</a>
+<a href="#" class="list-group-item list-group-item-action">
+<i class="bi bi-file-earmark-text me-2"></i>
+Logs
+</a>
+<a href="#" class="list-group-item list-group-item-action">
+<i class="bi bi-gear-fill me-2"></i>
+Settings
+</a>
+</div>
+</div>
+<div class="col-lg-10 col-md-9 dashboard p-4">
+<div class="d-flex justify-content-between align-items-center flex-wrap mb-4">
+<div>
+<h2 class="fw-bold">
+Infrastructure Dashboard
+</h2>
+<p class="text-muted">
+Monitor all cloud infrastructure from one place.
+</p>
+</div>
+<button class="btn btn-primary">
+<span class="spinner-border spinner-border-sm me-2"></span>
+Refresh
+</button>
+</div>
+<div class="row g-4">
+<div class="col-lg-3 col-md-6">
+<div class="card metric-card shadow-sm">
+<div class="card-body">
+<div class="d-flex justify-content-between">
+<div>
+<h6 class="text-muted">CPU Usage</h6>
+<h2>68%</h2>
+</div>
+<i class="bi bi-cpu-fill icon"></i>
+</div>
+<div class="progress mt-3">
+<div class="progress-bar bg-success"
+style="width:68%">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-lg-3 col-md-6">
+<div class="card metric-card shadow-sm">
+<div class="card-body">
+<div class="d-flex justify-content-between">
+<div>
+<h6 class="text-muted">Memory</h6>
+<h2>81%</h2>
+</div>
+<i class="bi bi-memory icon"></i>
+</div>
+<div class="progress mt-3">
+<div class="progress-bar bg-warning"
+style="width:81%">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-lg-3 col-md-6">
+<div class="card metric-card shadow-sm">
+<div class="card-body">
+<div class="d-flex justify-content-between">
+<div>
+<h6 class="text-muted">Disk Usage</h6>
+<h2>91%</h2>
+</div>
+<i class="bi bi-device-hdd-fill icon"></i>
+</div>
+<div class="progress mt-3">
+<div class="progress-bar bg-danger"
+style="width:91%">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-lg-3 col-md-6">
+<div class="card metric-card shadow-sm">
+<div class="card-body">
+<div class="d-flex justify-content-between">
+<div>
+<h6 class="text-muted">Network</h6>
+<h2>54%</h2>
+</div>
+<i class="bi bi-wifi icon"></i>
+</div>
+<div class="progress mt-3">
+<div class="progress-bar bg-success"
+style="width:54%">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row mt-4">
+    <div class="col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white">
+                <h5 class="fw-bold mb-0">
+                    Running Services
+                </h5>
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="#"
+                class="list-group-item list-group-item-action"
+                data-bs-toggle="modal"
+                data-bs-target="#serviceModal">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6>Authentication API</h6>
+                            <small class="text-muted">
+                                Host : auth-prod-01
+                            </small>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-success">
+                                Operational
+                            </span>
+                            <div>24 ms</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#"
+                class="list-group-item list-group-item-action"
+                data-bs-toggle="modal"
+                data-bs-target="#serviceModal">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6>Payment Gateway</h6>
+                            <small class="text-muted">
+                                Host : pay-prod-02
+                            </small>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-warning text-dark">
+                                Degraded
+                            </span>
+                            <div>128 ms</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#"
+                class="list-group-item list-group-item-action"
+                data-bs-toggle="modal"
+                data-bs-target="#serviceModal">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6>Email Service</h6>
+                            <small class="text-muted">
+                                Host : smtp-east-01
+                            </small>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-success">
+                                Operational
+                            </span>
+                            <div>31 ms</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#"
+                class="list-group-item list-group-item-action"
+                data-bs-toggle="modal"
+                data-bs-target="#serviceModal">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6>Storage Server</h6>
+                            <small class="text-muted">
+                                Host : storage-04
+                            </small>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-danger">
+                                Down
+                             </span>
+                            <div>--</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#"
+                class="list-group-item list-group-item-action"
+                data-bs-toggle="modal"
+                data-bs-target="#serviceModal">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6>Analytics Engine</h6>
+                            <small class="text-muted">
+                                Host : analytics-01
+                            </small>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-success">
+                                Operational
+                            </span>
+                            <div>19 ms</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 mt-4 mt-lg-0">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white">
+                <h5 class="fw-bold mb-0">
+                    Recent Alerts
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-success">
+                    ✔ CPU usage is stable.
+                </div>
+                <div class="alert alert-warning">
+                    ⚠ Memory exceeded 80%.
+                </div>
+                <div class="alert alert-danger">
+                    ✖ Storage Server is offline.
+                </div>
+                <div class="alert alert-primary">
+                    ℹ Backup completed successfully.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade"
+id="serviceModal"
+tabindex="-1">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title">
+Service Details
+</h5>
+<button
+class="btn-close"
+data-bs-dismiss="modal">
+</button>
+</div>
+<div class="modal-body">
+<p><strong>Service :</strong> Authentication API</p>
+<p><strong>Host :</strong> auth-prod-01</p>
+<p><strong>Status :</strong>
+<span class="badge bg-success">
+Operational
+</span>
+</p>
+<p><strong>Response Time :</strong> 24 ms</p>
+<p><strong>Updated :</strong> 06 July 2026 • 10:30 AM</p>
+</div>
+<div class="modal-footer">
+<button
+class="btn btn-secondary"
+data-bs-dismiss="modal">
+Close
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
